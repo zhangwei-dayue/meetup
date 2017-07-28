@@ -1,9 +1,8 @@
 <div class="col-md-8 col-md-offset-2">
   <h2><%= @event.title %></h2>
-  <hr>
 
   <p class="description">
-    简介
+    简介<br>
     <%= @event.description %>
   </p>
   <hr>
@@ -15,19 +14,30 @@
     <% else %>
       <% @floor = 1 %>
       <% @event.comments.each do |comment| %>
-        <% @floor %>楼
+        <%= @floor %>楼
         <div class="comment clearfix">
           <div class="comment_content">
             <p class="comment_name"><strong><%= comment.name %></strong></p>
             <p class="comment_body"><% comment.body %></p>
           </div>
           <% if current_user == comment.user %>
-            <p><%= link_to("删除", event_comment_path(comment.event, event), method: :delete, class: "button", data: {confirm: "你确定删除吗？"})%></p>
+            <p><%= link_to("删除", event_comment_path(comment.event, comment), method: :delete, class: "button", data: {confirm: "你确定删除吗？"})%></p>
           <% end %>
         </div>
         <% @floor = @floor + 1 %>
         </br>
+        <hr>
       <% end %>
+    <% end %>
+
+    <h4>发表评论</h4>
+    <%= simple_form_for ([@event, @event.comments.build]) do |f| %>
+      <div class="form-group">
+        <%= f.input :name, :label => "标题", input_html: {class: "form-control"} %><br>
+        <%= f.input :body, :label => "内容", input_html: {class: "form-control"} %>
+      </div>
+      <br>
+      <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: "提交中。。。"} %>
     <% end %>
   </div>
 </div>
