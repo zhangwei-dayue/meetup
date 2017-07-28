@@ -1,6 +1,33 @@
 <div class="col-md-8 col-md-offset-2">
   <h2><%= @event.title %></h2>
   <hr>
-  简介
-  <%= @event.description %>
+
+  <p class="description">
+    简介
+    <%= @event.description %>
+  </p>
+  <hr>
+
+  <div id="comments">
+    <h3><%= @event.comments.count %> 条评论</h3>
+    <% if @event.comments.count == 0 %>
+      <p>尚未有人评论</p>
+    <% else %>
+      <% @floor = 1 %>
+      <% @event.comments.each do |comment| %>
+        <% @floor %>楼
+        <div class="comment clearfix">
+          <div class="comment_content">
+            <p class="comment_name"><strong><%= comment.name %></strong></p>
+            <p class="comment_body"><% comment.body %></p>
+          </div>
+          <% if current_user == comment.user %>
+            <p><%= link_to("删除", event_comment_path(comment.event, event), method: :delete, class: "button", data: {confirm: "你确定删除吗？"})%></p>
+          <% end %>
+        </div>
+        <% @floor = @floor + 1 %>
+        </br>
+      <% end %>
+    <% end %>
+  </div>
 </div>
