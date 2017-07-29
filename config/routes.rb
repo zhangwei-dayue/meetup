@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       get "/comments/:comment_id" => "comments#show", :as => :comment
       post "/comments" => "comments#create", :as => :create_comments
       delete "/comments/:comment_id" => "comments#destroy", :as => :delete_comment
+      post "/signup" => "auth#signup"
+      post "/login" => "auth#login"
+      post "/logout" => "auth#logout"
     end
   end
   root "events#index"
