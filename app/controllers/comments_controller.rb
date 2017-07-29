@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @event.comments.new(params[:comment].permit(:name, :body))
     @comment.user = current_user
-    if @comment.save
+    if @comment.save！
       redirect_to event_path(@event)
     else
       redirect_to event_path(@event), alert: "未发表成功"
