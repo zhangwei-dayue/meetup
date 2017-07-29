@@ -1,9 +1,15 @@
 <div class="col-md-8 col-md-offset-2">
   <h2><%= @event.title %></h2>
+  <hr>
 
   <p class="description">
-    简介<br>
+    <h4>简介</h4><br>
     <%= @event.description %>
+  </p>
+
+  <p class="detail">
+    <h4>活动内容</h4><br>
+    <%= @event.detail %>
   </p>
   <hr>
 
@@ -20,9 +26,12 @@
             <p class="comment_name"><strong><%= comment.name %></strong></p>
             <p class="comment_body"><% comment.body %></p>
           </div>
-          <% if current_user == comment.user %>
-            <p><%= link_to("删除", event_comment_path(comment.event, comment), method: :delete, class: "button", data: {confirm: "你确定删除吗？"})%></p>
-          <% end %>
+          <div class="pull-right">
+            <%= comment.user.email %>
+            <% if current_user == comment.user %>
+              <p><%= link_to("删除", event_comment_path(comment.event, comment), method: :delete, class: "button", data: {confirm: "你确定删除吗？"})%></p>
+            <% end %>
+          </div>
         </div>
         <% @floor = @floor + 1 %>
         </br>
