@@ -42,8 +42,8 @@
     <h4>发表评论</h4>
     <%= simple_form_for ([@event, @event.comments.build]) do |f| %>
       <div class="form-group">
-        <%= f.input :name, :label => "标题"%><br>
-        <%= f.input :body, :label => "内容"%>
+        <%= f.input :name, :label => "标题", input_html: {class: "form-control"} %><br>
+        <%= f.input :body, :label => "内容", input_html: {class: "form-control"} %>
       </div>
       <br>
       <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: "提交中。。。"} %>
