@@ -4,5 +4,12 @@ Rails.application.routes.draw do
   resources :events do
     resources :comments
   end
+
+  namespace :api, :defaults => { :format => :json } do
+    namespace :v1 do
+      get "/events" => "events#index", :as => :events
+      get "/events/:event_id" => "events#show", :as => :event
+    end
+  end
   root "events#index"
 end
