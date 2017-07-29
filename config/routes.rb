@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       get "/events" => "events#index", :as => :events
       get "/events/:event_id" => "events#show", :as => :event
+      get "/comments/:comment_id" => "comments#show", :as => :comment
+      post "/comments" => "comments#create", :as => :create_comments
+      delete "/comments/:comment_id" => "comments#destroy", :as => :delete_comment
     end
   end
   root "events#index"

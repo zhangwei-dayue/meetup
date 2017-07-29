@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
   validates_presence_of :name
   belongs_to :event
-  belongs_to :user
+  belongs_to :user, :optional => true
 end
