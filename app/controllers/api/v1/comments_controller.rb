@@ -5,6 +5,7 @@ class Api::V1::CommentsController < ApiController
     @comment = Comment.new(:event_id => @event.id,
                            :name => params[:name],
                            :body => params[:body])
+    @comment.user = current_user
     if @comment.save
       render :json => {
         :comment_url => api_v1_comment_url(@comment.id)

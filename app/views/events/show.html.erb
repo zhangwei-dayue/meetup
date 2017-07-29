@@ -26,6 +26,12 @@
             <p class="comment_name"><strong><%= comment.name %></strong></p>
             <p class="comment_body"><%= comment.body %></p>
           </div>
+          <div class="pull-right">
+            <%= comment.user.email %>
+            <% if current_user == comment.user %>
+              <p><%= link_to("删除", event_comment_path(comment.event, comment), method: :delete, class: "button", data: {confirm: "你确定删除吗？"})%></p>
+            <% end %>
+          </div>
         </div>
         <% @floor = @floor + 1 %>
         </br>
